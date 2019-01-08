@@ -20,13 +20,24 @@
 //     http.request(options, processPublicTimeline).end();
 // }
 
-var globalValue;
+// var globalValue;
+//
+// module.exports.setGlobal = function(val) {
+//     globalValue = val;
+// };
+//
+// module.exports.returnGlobal = function() {
+//     console.log(global);
+//     return globalValue;
+// };
 
-module.exports.setGlobal = function(val) {
-    globalValue = val;
-};
+var eventEmitter = require('events').EventEmitter;
+var counter = 0;
 
-module.exports.returnGlobal = function() {
-    console.log(global);
-    return globalValue;
-};
+var em = new eventEmitter()
+
+setInterval(function(){em.emit(33, counter++);},3000);
+
+em.on(33, function(data) {
+    console.log('Num 33 ' + data);
+});
